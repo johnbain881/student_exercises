@@ -1,9 +1,9 @@
-class Instructor:
+from NSSperson import NSSperson
+
+
+class Instructor(NSSperson):
     def __init__(self, first, last, slack, specialty):
-        self.first = first
-        self.last = last
-        self.slack = slack
-        self.cohort = ""
+        super().__init__(first, last, slack)
         self.specialty = specialty
 
 

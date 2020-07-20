@@ -50,6 +50,7 @@ instructor3.assign(student4, exercise4)
 
 students = [student1, student2, student3, student4]
 exercises = [exercise1, exercise2, exercise3, exercise4]
+instructors = [instructor1, instructor2, instructor3]
 
 for student in students:
     print_string = ""
@@ -58,5 +59,5 @@ for student in students:
     print(f"{student.first} is working on {print_string}")
 
 
-
-
+for instructor in instructors:
+    print(f"{instructor.first} {instructor.last} {instructor.specialty}")
