@@ -33,8 +33,10 @@ CREATE TABLE Exercise (
 
 CREATE TABLE Student_Exercises (
     id INTEGER NOT NULL PRIMARY KEY,
+    instructor_id INTEGER NOT NULL,
     student_id INTEGER NOT NULL,
     exercise_id INTEGER NOT NULL,
+    FOREIGN KEY(instructor_id) REFERENCES Instructor(id),
     FOREIGN KEY(student_id) REFERENCES Student(id),
     FOREIGN KEY(exercise_id) REFERENCES Exercise(id)
 );
@@ -80,31 +82,47 @@ Values ("Styling", "CSS");
 INSERT INTO Exercise (exercise, language)
 Values ("ChickenMonkey", "JavaScript");
 
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (1, 1);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (1, 2);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (2, 3);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (2, 4);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (3, 5);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (3, 1);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (4, 2);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (4, 3);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (5, 4);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (5, 5);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (6, 1);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (6, 2);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (7, 3);
-INSERT INTO Student_Exercises (student_id, exercise_id)
-Values (7, 4);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (1, 1, 1);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (2, 1, 2);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (3, 2, 3);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (1, 2, 4);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (2, 3, 5);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (3, 3, 1);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (1, 4, 2);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (2, 4, 3);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (3, 5, 4);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (1, 5, 5);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (2, 6, 1);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (3, 6, 2);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (1, 7, 3);
+INSERT INTO Student_Exercises (instructor_id, student_id, exercise_id)
+Values (2, 7, 4);
+
+
+
+select
+                    e.Id ExerciseId,
+                    e.exercise,
+                    s.Id,
+                    s.first_name,
+                    s.last_name,
+                    i.Id instructorId,
+                    i.first_name instructor_first,
+                    i.last_name instructor_last
+                from Exercise e
+                join Student_Exercises se on se.Exercise_Id = e.Id
+                join Student s on s.Id = se.Student_Id
+                join Instructor i on s.Id = se.Instructor_Id;
